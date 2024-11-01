@@ -10,6 +10,7 @@ Assignment2/
 |   ├── train.csv
 ├── clean_data/
 │   └── Question-A_after_impute.csv
+│   └── Question-A.csv
 ├── results/
 │   ├── Question-B_removing_units.csv
 │   ├── Question-c_one_hot_encoding.csv
@@ -73,6 +74,7 @@ Assignment2/
 
 # Run the scripts individually
   python3 src/Question-a_(finding_missing_impute).py
+  python3 src/Question-a(finding_missing_impute).py
   python3 src/Question-b_(removing_units_from_attributes).py
   python3 src/Question-c(one_hot_encoded).py
   python3 src/Question-d_(calculating_car_age).py
