@@ -37,7 +37,6 @@ renamed_data.to_csv('results/Question-e(results)/rename.csv')
 # 4. MUTATE
 data['Price_every_Year'] = data['Price'] / data['Car_Age']
 data['Price_every_KM'] = data['Price'] / data['Kilometers_Driven'] * 1000  # Price per 1000 KM
-# data['Engine_Power_Ratio'] = data['Power'] / data['Engine']  # Power to Engine ratio
 print("\n\n4. New Calculated Columns:\n")
 print(data[['Price', 'Car_Age', 'Price_every_Year', 'Price_every_KM']].head())
 

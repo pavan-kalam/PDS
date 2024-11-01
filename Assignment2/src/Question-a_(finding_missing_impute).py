@@ -6,35 +6,10 @@ from datetime import datetime
 raw_data = pd.read_csv('raw_data/train.csv')
 raw_data = raw_data.iloc[:, 1:]
 
-# # Check for missing values
-# missing_values = raw_data.isnull().sum()
-
-# # Impute missing values
-# for column in raw_data.columns:
-#     if raw_data[column].isnull().sum() > 0:
-#         if raw_data[column].dtype == 'object':  # Categorical columns
-#             # Impute with mode
-#             raw_data[column] = raw_data[column].fillna(raw_data[column].mode()[0])
-#         else:  # Numeric columns
-#             # Impute with median
-#             raw_data[column] = raw_data[column].fillna(raw_data[column].median())
-
-# # Verify if there are any missing values left
-# missing_values_after = raw_data.isnull().sum()
-
-# # Display the missing values before and after
-# print("Missing values before imputation:")
-# before_missing = missing_values
-# print(before_missing)
-# print("\nMissing values after imputation:")
-# print(missing_values_after)
-
-# raw_data.to_csv('clean_data/Question-A_after_impute.csv')
-
 # Check for missing values
 missing_values = raw_data.isnull().sum()
 
-# Function to convert price strings to numeric while preserving original format
+# Function to convert strings in the price to numeric
 def convert_price(price):
     if pd.isna(price):
         return np.nan
@@ -78,17 +53,17 @@ if raw_data['New_Price'].isnull().sum() > 0:
         overall_median = raw_data['New_Price_numeric'].median()
         raw_data.loc[final_missing, 'New_Price_numeric'] = overall_median
 
-# Additional refinement: Age-based markup
+
 def calculate_markup(row):
     age = 2024 - row['Year']  # Adjust current year as needed
     if age <= 2:
-        return 1.75  # 50% markup for newer cars
+        return 1.75  # 75% markup for newer cars
     elif age <= 7:
-        return 1.5  # 30% markup for medium-aged cars
+        return 1.5 
     elif age <= 13:
         return 1.3 
     else:
-        return 1.1  # 20% markup for older cars
+        return 1.1 
 
 # Convert Price to numeric for comparison
 price_numeric = raw_data['Price'].apply(convert_price)
@@ -124,12 +99,9 @@ print(missing_values)
 print("\nMissing values after imputation:")
 print(missing_values_after)
 
-# Verify New_Price vs Price relationship
-price_check = (raw_data['New_Price'].apply(convert_price) <= raw_data['Price'].apply(convert_price)).sum()
-print(f"\nNumber of cases where New_Price <= Price: {price_check}")
 
 # Display sample of original and imputed values
 print("\nSample of Price and New_Price:")
 print(raw_data.head(10))
 
-raw_data.to_csv('clean_data/Question-A_after_impute2.csv')
+raw_data.to_csv('clean_data/Question-A_after_impute.csv')

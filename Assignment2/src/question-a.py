@@ -17,7 +17,7 @@ for column in raw_data.columns:
         else:  # Numeric columns
             raw_data[column] = raw_data[column].fillna(raw_data[column].median())
 
-# Drop the 'New_Price' column due to excessive missing values
+# Drop the 'New_Price' column
 raw_data.drop(columns=['New_Price'], inplace=True)
 
 # Verify if there are any missing values left
@@ -29,4 +29,4 @@ print(missing_values)
 print("\nMissing values after imputation:")
 print(missing_values_after)
 
-raw_data.to_csv('clean_data/Question-A_after_impute2.csv')
+raw_data.to_csv('clean_data/Question-A.csv')
